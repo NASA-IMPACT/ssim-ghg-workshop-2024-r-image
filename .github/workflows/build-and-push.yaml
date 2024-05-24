@@ -45,10 +45,6 @@ jobs:
         repository: ${{ env.IMAGE_NAME}}
         public: true
 
-    - name: Set outputs
-      id: sha_short
-      run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-12)" >> $GITHUB_OUTPUT
-
     - name: Build container image
       uses: jupyterhub/repo2docker-action@master
       with:
@@ -59,5 +55,6 @@ jobs:
 
     - name: Push to Amazon ECR
       run: |
+        short_sha=$(echo ${{ github.sha }} | cut -c1-12)
         docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:latest
-        docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${{ steps.sha_short.outputs.sha_short }}
+        docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}:${short_sha}
