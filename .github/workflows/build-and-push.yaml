@@ -47,7 +47,7 @@ jobs:
 
     - name: Set outputs
       id: sha_short
-      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      run: echo "short_sha=$(echo ${GITHUB_SHA} | cut -c1-12)" >> $GITHUB_OUTPUT
 
     - name: Build container image
       uses: jupyterhub/repo2docker-action@master
