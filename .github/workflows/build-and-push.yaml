@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: public.ecr.aws
-  NAMESPACE: nasa-veda
+  NAMESPACE: i8x6m1u9
   IMAGE_NAME: ssim-ghg-workshop-2024-r-image
 
 jobs:
